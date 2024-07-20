@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        if (digits == "") {
+            return {};
+        }
+        
+        std::vector<std::vector<char>> l = {{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}, 
+                                            {'j', 'k', 'l'}, {'m', 'n', 'o'}, {'p', 'q', 'r', 's'}, 
+                                            {'t', 'u', 'v'}, {'w', 'x', 'y', 'z'}};
+        int size = 1;
+        for (char& c : digits) {
+            size *= l[c-'2'].size();
+        }
+        std::vector<std::string> res;
+        for (int i = 0; i < size; ++i) {
+            std::string tmp = "";
+            int tmp_size = 1;
+            for (int j = 0; j < digits.size(); ++j) {
+                tmp_size *= l[digits[j] - '2'].size();
+                tmp += l[digits[j] - '2'][i * tmp_size / size % l[digits[j] - '2'].size()];
+            }
+            res.push_back(tmp);
+        }
+        return res;
+    }
+};
