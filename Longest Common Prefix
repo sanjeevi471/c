@@ -1,0 +1,32 @@
+string longestCommonPrefix(vector<string>& strs) {
+    int minSize=strs[0].size();
+     string preFix,preFix1;
+    int count=0;
+    for(int i=1;i<strs.size();i++){
+        if(minSize>strs[i].size()){
+            minSize=strs[i].size();
+        }    
+    }
+     for(int i=minSize-1;i>=0;i--){
+        preFix=subString(strs[0],0,i);
+         for(int j=0;j<strs.size();j++){
+            preFix1=subString(strs[j],0,i);
+            if(preFix==preFix1){
+                count++;
+            }
+            
+        }
+         if(count==strs.size())
+        {
+           // cout<<"Matching: "<<preFix<<endl;
+            break;
+        }
+        else{
+            preFix="";
+            count=0;
+        }
+    }
+    return preFix;
+    
+    
+}
