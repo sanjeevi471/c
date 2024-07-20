@@ -1,0 +1,38 @@
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummynode = new ListNode(0);  // creating dummy node;
+		
+         if(head->next==NULL){
+            head=head->next;
+            delete(head);
+            return dummynode->next;
+        }
+        dummynode->next=head; // dummy node pointing to head
+        ListNode* prev=head;  // previous pointer to store previous node
+        ListNode* curr=head; // current poninter to point current node
+        int count=1;
+        while(curr->next!=NULL){
+                if(count!=n){
+                    count++;
+                    curr=curr->next;
+                    continue;
+                }
+            curr=curr->next;
+            prev=prev->next;
+        }
+        
+		
+ 		
+        if(dummynode->next==head && count!=1 && prev==head){
+            dummynode->next=head->next;
+            return dummynode->next;
+        }
+         while(head->next!=prev && head!=prev){
+            head=head->next;
+        }
+        head->next=prev->next;
+        
+        return dummynode->next;
+        
+    }
+};```
